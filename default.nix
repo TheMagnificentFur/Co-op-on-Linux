@@ -10,19 +10,21 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
 
-    # install the main script with correct name
+    # install the main script
     if [ -f "$src/Co-Op-On-Linux.sh" ]; then
       install -m755 "$src/Co-Op-On-Linux.sh" $out/bin/coop-linux
     fi
 
-    # install other scripts if present
+    # install other scripts
     for f in adaptive-sync.sh install.sh; do
       if [ -f "$src/$f" ]; then
-        install -m755 "$src/$f" $out/bin/"${f%.*}"
+        # strip .sh extension using Bash
+        baseName=$(basename "$f" .sh)
+        install -m755 "$src/$f" "$out/bin/$baseName"
       fi
     done
 
-    # optional: copy helper-scripts
+    # copy helper-scripts if present
     if [ -d "$src/helper-scripts" ]; then
       mkdir -p $out/lib/coop/helper-scripts
       cp -r "$src/helper-scripts"/* $out/lib/coop/helper-scripts/
