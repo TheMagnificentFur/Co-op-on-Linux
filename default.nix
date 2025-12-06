@@ -7,7 +7,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    install -m755 coop.sh $out/bin/coop
+    install -m755 install-steamos.sh $out/bin/coop
     install -m755 adaptive-sync.sh $out/bin/adaptive-sync
 
     if [ -d helper-scripts ]; then
