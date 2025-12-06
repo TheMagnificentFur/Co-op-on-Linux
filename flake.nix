@@ -19,7 +19,7 @@
         mkdir -p $out/bin
 
         # install the main scripts
-        for f in coop.sh adaptive-sync.sh install.sh; do
+        for f in Co-Op-On-Linux.sh install-steamos.sh create-new-profile.sh; do
           if [ -f "$f" ]; then
             install -m755 "$f" $out/bin/"$f"
           fi
